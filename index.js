@@ -44,6 +44,21 @@ app.get('/', (req, res) => {
   res.sendFile(resolve(__dirname, 'pages/index.html'));
 });
 
+const {data}=require('./data.json')
+
+// import data from 'data.json'; 
+
+app.post('/students/above-threshold',(res,req)=>{
+  const threshold=req.body
+  const studentGreaterThanThreshold=data.filter((element,index)=>{
+    return element.total>threshold;
+  })
+  return res.send({
+    count,
+    studentGreaterThanThreshold
+  })
+})
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
